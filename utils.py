@@ -1,3 +1,4 @@
+from flask import jsonify
 def parse_chat_entries(chat_json):
     formatted_chat = []
     

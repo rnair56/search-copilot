@@ -12,11 +12,18 @@ document.getElementById('message-form').addEventListener('submit', function(e) {
 function appendMessage(message, sender) {
     const messageContainer = document.getElementById('message-container');
     const messageDiv = document.createElement('div');
-    messageDiv.textContent = message;
+
+    // Convert newlines to <br> and bold markdown to <strong> tags for HTML
+    const formattedMessage = message
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Convert markdown bold to <strong>
+        .replace(/\n/g, '<br>'); // Convert newlines to <br>
+
+    messageDiv.innerHTML = formattedMessage; // Use innerHTML to interpret the <br> and <strong>
     messageDiv.className = sender === 'user' ? 'user-message' : 'bot-message';
     messageContainer.appendChild(messageDiv);
     messageContainer.scrollTop = messageContainer.scrollHeight; // Scroll to the latest message
 }
+
 
 function front_to_back_connection(message) {
     fetch("/chat", {
