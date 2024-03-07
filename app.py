@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 # import openai
+from copilot.calling_agents_setup import user_proxy, manager
+from utils import parse_chat_entries
 
 app = Flask(__name__)
 
@@ -12,19 +14,12 @@ def home():
 
 @app.route("/chat", methods=["POST"])
 def chat():
-    # user_message = request.json['message']
-    # # Call the OpenAI API with the user's message
-    # response = openai.Completion.create(
-    #   engine="text-davinci-003", # Update the engine if needed
-    #   prompt=user_message,
-    #   temperature=0.7,
-    #   max_tokens=150,
-    #   top_p=1.0,
-    #   frequency_penalty=0.0,
-    #   presence_penalty=0.0
-    # )
-    # response_message = response.choices[0].text.strip()
-    # return jsonify({"response": response_message})
+    user_message = request.json['message']
+    chat_response = user_proxy.initiate_chat(
+    manager,message= user_message)
+    # message="Find a latest paper about gpt-4 on arxiv and find its potential applications in software."
+    response_message = parse_chat_entries(chat_response.chat_history)
+    return jsonify({"response": response_message})
     return None
 
 if __name__ == "__main__":
