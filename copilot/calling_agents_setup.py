@@ -32,7 +32,10 @@ groupchat = autogen.GroupChat(agents=[user_proxy, coder, pm], messages=[], max_r
 manager = autogen.GroupChatManager(groupchat=groupchat, llm_config=llm_config)
 
 
-
-user_proxy.initiate_chat(
-    manager, message="Find a latest paper about gpt-4 on arxiv and find its potential applications in software."
-)
+if __name__=="__main__":
+    results = user_proxy.initiate_chat(
+        manager, message="Find a latest paper about gpt-4 on arxiv and find its potential applications in software."
+    )
+    print(type(results))
+    print(results.chat_history)
+    
