@@ -20,7 +20,6 @@ def chat():
     # message="Find a latest paper about gpt-4 on arxiv and find its potential applications in software."
     response_message = parse_chat_entries(chat_response.chat_history)
     return jsonify({"response": response_message})
-    return None
 
 if __name__ == "__main__":
     app.run(debug=True)
