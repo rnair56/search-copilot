@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 # import openai
-from copilot.calling_agents_setup import user_proxy, manager
+# from copilot.calling_agents_setup import user_proxy, manager
+from copilot.search_engine import user_proxy, manager
 from utils import parse_chat_entries
 
 app = Flask(__name__)
@@ -22,4 +23,4 @@ def chat():
     return jsonify({"response": response_message})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True)#use_reloader=False
