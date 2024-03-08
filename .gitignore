@@ -2,3 +2,4 @@ OAI_CONFIG_LIST
 __pycache__/
 .cache/
 groupchat/
+code_exec/
